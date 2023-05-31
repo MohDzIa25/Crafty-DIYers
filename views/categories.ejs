@@ -34,7 +34,7 @@
       <div class="pt-1"><%= craft.name %></div>
     </a>
     <% }) %>
-  <% } else { %>
+  <% } else if(typeof categories === 'undefined' || categories.length === 0) { %>
     <p>No items found.</p>
   <% } %>
 </div>
