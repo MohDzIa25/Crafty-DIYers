@@ -17,7 +17,7 @@ exports.homepage = async(req, res) => {
 
     const diy = { latest, paper, artist , kids };
 
-    res.render('index', { title: 'DIY Blog - Home', categories, diy } );
+    res.render('index', { title: 'Crafty DIYers - Home', categories, diy } );
 
   } catch (error) {
     res.status(500).send({message: error.message || "Error Occured" });
@@ -32,9 +32,9 @@ exports.exploreCategories = async(req, res) => {
   try {
     const limitNumber = 20;
     const categories = await Category.find({}).limit(limitNumber);
-    res.render('categories', { title: 'DIY Blog - Categoreis', categories } );
+    res.render('categories', { title: 'Crafty DIYers - Categoreis', categories,categoryName:"Explore Categories" } );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occured" });
+    res.status(500).send({message: error.message || "Error Occured" });
   }
 } 
 
@@ -43,14 +43,14 @@ exports.exploreCategories = async(req, res) => {
  * GET /categories/:id
  * Categories By Id
 */
-exports.exploreCategoriesById = async(req, res) => { 
+exports.exploreCraftbyCategorie = async(req, res) => { 
   try {
-    let categoryId = req.params.id;
+    let category = req.params.id;
     const limitNumber = 20;
-    const categoryById = await Craft.find({ 'category': categoryId }).limit(limitNumber);
-    res.render('categories', { title: 'DIY Blog - Categoreis', categoryById } );
+    const categoryById = await Craft.find({ 'category': category }).limit(limitNumber);
+    res.render('categories', { title: 'Crafty DIYers -'+category, categoryById ,categoryName:category} );
   } catch (error) {
-    res.satus(500).send({message: error.message || "Error Occured" });
+    res.status(500).send({message: error.message || "Error Occured" });
   }
 } 
  
@@ -62,58 +62,58 @@ exports.exploreCraft = async(req, res) => {
   try {
     let craftId = req.params.id;
     const craft = await Craft.findById(craftId);
-    res.render('craft', { title: 'DIY Blog - Craft', craft } );
+    res.render('craft', { title: 'Crafty DIYers -'+craft.name, craft } );
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" });
+  }
+} 
+
+
+/**
+ * POST /search
+ * Search 
+*/
+exports.searchCraft = async(req, res) => {
+  try {
+    let searchTerm = req.body.searchTerm;
+    let diy = await Craft.find( { $text: { $search: searchTerm, $diacriticSensitive: false } });
+    res.render('search', { title: 'Crafty DIYers - Search', diy } );
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" });
+  }
+  
+}
+
+/**
+ * GET /explore-latest
+ * Explplore Latest 
+*/
+exports.exploreLatest = async(req, res) => {
+  try {
+    const limitNumber = 20;
+    const diy = await Craft.find({}).sort({ _id: -1 }).limit(limitNumber);
+    res.render('explore-latest', { title: 'Crafty DIYers - Explore Latest DIYs', diy } );
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
 } 
 
 
-// /**
-//  * POST /search
-//  * Search 
-// */
-// exports.searchRecipe = async(req, res) => {
-//   try {
-//     let searchTerm = req.body.searchTerm;
-//     let recipe = await Recipe.find( { $text: { $search: searchTerm, $diacriticSensitive: true } });
-//     res.render('search', { title: 'Cooking Blog - Search', recipe } );
-//   } catch (error) {
-//     res.satus(500).send({message: error.message || "Error Occured" });
-//   }
-  
-// }
 
-// /**
-//  * GET /explore-latest
-//  * Explplore Latest 
-// */
-// exports.exploreLatest = async(req, res) => {
-//   try {
-//     const limitNumber = 20;
-//     const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
-//     res.render('explore-latest', { title: 'Cooking Blog - Explore Latest', recipe } );
-//   } catch (error) {
-//     res.satus(500).send({message: error.message || "Error Occured" });
-//   }
-// } 
-
-
-
-// /**
-//  * GET /explore-random
-//  * Explore Random as JSON
-// */
-// exports.exploreRandom = async(req, res) => {
-//   try {
-//     let count = await Recipe.find().countDocuments();
-//     let random = Math.floor(Math.random() * count);
-//     let recipe = await Recipe.findOne().skip(random).exec();
-//     res.render('explore-random', { title: 'Cooking Blog - Explore Latest', recipe } );
-//   } catch (error) {
-//     res.satus(500).send({message: error.message || "Error Occured" });
-//   }
-// } 
+/**
+ * GET /explore-random
+ * Explore Random as JSON
+*/
+exports.exploreRandom = async(req, res) => {
+  try {
+    let count = await Craft.find({});
+    let random = Math.floor(Math.random() * count.length);
+    let craft = count[random];
+    res.render('craft', { title: 'Crafty DIYers - Explore Random DIYs', craft } );
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" });
+  }
+} 
 
 
 // /**

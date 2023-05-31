@@ -28,8 +28,8 @@ const craftSchema = new mongoose.Schema({
   },
 });
 
-// craftSchema.index({ name: 'text', description: 'text' });
+craftSchema.index({ name: 'text', description: 'text' });
 // WildCard Indexing
-//recipeSchema.index({ "$**" : 'text' });
+// craftSchema.index({ "$**" : 'text' });
 
 module.exports = mongoose.model('Craft', craftSchema);
