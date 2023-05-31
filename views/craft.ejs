@@ -1,0 +1,41 @@
+<% if(craft != null ) { %>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><%- craft.name %></li>
+    </ol>
+  </nav>
+
+
+  <div class="row">
+
+    <div class="col-12 col-md-4">
+      <img src="/uploads/<%- craft.image %>" class="img-fluid sticky-top" style="top: 20px;" alt="<%- craft.name %>" loading="lazy">
+    </div>
+
+    <div class="col-12 col-md-8">
+      <div class="row">
+        <div class="col-12"><h1><%- craft.name %></h1></div>
+        <div class="col-12 mb-4"><i class="bi bi-tag"></i> <%- craft.category %></div>
+        <div class="col-12" style="white-space: pre-line;">
+          <h4>Short Description</h4>
+          <%- craft.description %>
+        </div>
+      </div>
+
+      <div class="row pt-4">
+        <div class="col-12">
+          <h4>Instructions</h4>
+          <ul class="list-group list-group-flush">
+            <% craft.instructions.forEach(function(instructions, index){ %>
+              <li class="list-group-item"><%= instructions %></li>
+            <% }) %>
+          </ul> 
+        </div>
+      </div>
+    </div>
+  </div>
+<% } else { %>
+  <p>No item found.</p>
+<% } %>

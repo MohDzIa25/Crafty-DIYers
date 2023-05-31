@@ -1,0 +1,51 @@
+:root {
+  --bs-font-sans-serif: 'Rubik', sans-serif;
+}
+
+/* .container-xxl { max-width: 1530px; } */
+
+body {
+  background-image: url("../img/background-craft.webp");
+  background-color: rgb(228, 228, 220);
+  padding: 0rem 4rem 0rem 4rem;
+}
+.background-image{
+  -webkit-mask-image: 
+  url(data:image/svg+xml;base64,PCEtLT94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/LS0+CiAgICAgICAgICAgICAgPHN2ZyBpZD0ic3ctanMtYmxvYi1zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSI+CiAgICAgICAgICAgICAgICAgICAgPGRlZnM+IAogICAgICAgICAgICAgICAgICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9InN3LWdyYWRpZW50IiB4MT0iMCIgeDI9IjEiIHkxPSIxIiB5Mj0iMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3RvcCBpZD0ic3RvcDEiIHN0b3AtY29sb3I9InJnYmEoMjQ4LCAxMTcsIDU1LCAxKSIgb2Zmc2V0PSIwJSIgZGF0YS1kYXJrcmVhZGVyLWlubGluZS1zdG9wY29sb3I9IiIgc3R5bGU9Ii0tZGFya3JlYWRlci1pbmxpbmUtc3RvcGNvbG9yOiAjYTkzYTA2OyI+PC9zdG9wPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHN0b3AgaWQ9InN0b3AyIiBzdG9wLWNvbG9yPSJyZ2JhKDI1MSwgMTk0Ljk3NSwgMzEsIDEpIiBvZmZzZXQ9IjEwMCUiIGRhdGEtZGFya3JlYWRlci1pbmxpbmUtc3RvcGNvbG9yPSIiIHN0eWxlPSItLWRhcmtyZWFkZXItaW5saW5lLXN0b3Bjb2xvcjogIzhhNjgwMjsiPjwvc3RvcD4KICAgICAgICAgICAgICAgICAgICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgICAgICAgICAgICAgICA8L2RlZnM+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSJ1cmwoI3N3LWdyYWRpZW50KSIgZD0iTTIxLjUsLTM4LjZDMjcuMiwtMzQuMSwzMC40LC0yNi44LDMzLjYsLTE5LjlDMzYuOSwtMTMsNDAuMSwtNi41LDQxLjEsMC42QzQyLjIsNy43LDQxLjEsMTUuNCwzNy45LDIyLjRDMzQuNywyOS4zLDI5LjQsMzUuNCwyMi43LDM4LjNDMTYsNDEuMiw4LDQwLjgsMC43LDM5LjdDLTYuNiwzOC41LC0xMy4zLDM2LjUsLTE5LjMsMzMuM0MtMjUuNCwzMCwtMzAuOSwyNS41LC0zNC40LDE5LjhDLTM3LjgsMTQsLTM5LjMsNywtMzkuMywwQy0zOS4zLC03LC0zNy44LC0xNCwtMzQuMywtMTkuN0MtMzAuOSwtMjUuNSwtMjUuNCwtMzAuMSwtMTkuNCwtMzQuM0MtMTMuMywtMzguNSwtNi43LC00Mi40LDAuNywtNDMuNkM4LC00NC43LDE1LjksLTQzLDIxLjUsLTM4LjZaIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MCA1MCkiIHN0cm9rZS13aWR0aD0iMCIgc3R5bGU9InRyYW5zaXRpb246IGFsbCAwLjNzIGVhc2UgMHM7Ij48L3BhdGg+CiAgICAgICAgICAgICAgPC9zdmc+);
+  -webkit-mask-repeat: no-repeat;
+
+}
+a { color: var(--bs-dark); }
+
+
+/* Category Card */
+.category__link {
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  transition: 250ms all;
+}
+
+.category__link:hover {
+  transform: scale(1.1);
+}
+
+.category__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 6px rgba(0,0,0,.16);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.category__img--large {
+  height: 330px;
+}
+
+.category__img img {
+  width: 100%;
+  object-fit: cover;
+}
