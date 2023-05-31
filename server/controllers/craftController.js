@@ -68,6 +68,20 @@ exports.exploreCraft = async(req, res) => {
   }
 } 
 
+/** deleteCraft  get*/
+
+
+
+exports.deleteCraft = async(req, res) => {
+  const infoErrorsObj = req.flash('delErrors');
+  const infoSubmitObj = req.flash('deleted');
+  let craftId = req.params.id;
+  const craft = await Craft.findById(craftId);
+  res.render('delete',{craft:craft, infoErrorsObj, infoSubmitObj});
+} 
+
+
+
 
 /**
  * POST /search
@@ -116,63 +130,85 @@ exports.exploreRandom = async(req, res) => {
 } 
 
 
-// /**
-//  * GET /submit-recipe
-//  * Submit Recipe
-// */
-// exports.submitRecipe = async(req, res) => {
-//   const infoErrorsObj = req.flash('infoErrors');
-//   const infoSubmitObj = req.flash('infoSubmit');
-//   res.render('submit-recipe', { title: 'Cooking Blog - Submit Recipe', infoErrorsObj, infoSubmitObj  } );
-// }
+/**
+ * GET /submit-craft
+ * Submit Craft
+*/
+exports.submitCraft = async(req, res) => {
+  const infoErrorsObj = req.flash('infoErrors');
+  const infoSubmitObj = req.flash('infoSubmit');
+  res.render('submit-diy', { title: 'Crafty DIYers - Submit Your DIY', infoErrorsObj, infoSubmitObj  } );
+  // res.render('submit-diy', { title: 'Crafty DIYers - Submit Your DIY' } );
+}
 
-// /**
-//  * POST /submit-recipe
-//  * Submit Recipe
-// */
-// exports.submitRecipeOnPost = async(req, res) => {
-//   try {
+/**
+ * POST /submit-craft
+ * Submit Craft
+*/
+exports.submitCraftOnPost = async(req, res) => {
+  try {
 
-//     let imageUploadFile;
-//     let uploadPath;
-//     let newImageName;
+    let imageUploadFile;
+    let uploadPath;
+    let newImageName;
 
-//     if(!req.files || Object.keys(req.files).length === 0){
-//       console.log('No Files where uploaded.');
-//     } else {
+    if(!req.files || Object.keys(req.files).length === 0){
+      console.log('No Files where uploaded.');
+    } else {
 
-//       imageUploadFile = req.files.image;
-//       newImageName = Date.now() + imageUploadFile.name;
+      imageUploadFile = req.files.image;
+      newImageName = Date.now() + imageUploadFile.name;
 
-//       uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
+      uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
 
-//       imageUploadFile.mv(uploadPath, function(err){
-//         if(err) return res.satus(500).send(err);
-//       })
+      imageUploadFile.mv(uploadPath, function(err){
+        if(err) return res.satus(500).send(err);
+      })
 
-//     }
+    }
 
-//     const newRecipe = new Recipe({
-//       name: req.body.name,
-//       description: req.body.description,
-//       email: req.body.email,
-//       ingredients: req.body.ingredients,
-//       category: req.body.category,
-//       image: newImageName
-//     });
+    const newCraft= new Craft({
+      name: req.body.name,
+      description: req.body.description,
+      email: req.body.email,
+      instructions: req.body.instruction,
+      category: req.body.category,
+      image: newImageName
+    });
+    console.log(req.body);
     
-//     await newRecipe.save();
+    await newCraft.save();
 
-//     req.flash('infoSubmit', 'Recipe has been added.')
-//     res.redirect('/submit-recipe');
-//   } catch (error) {
-//     // res.json(error);
-//     req.flash('infoErrors', error);
-//     res.redirect('/submit-recipe');
-//   }
-// }
+    req.flash('infoSubmit', 'Your DIY has been added.')
+    res.redirect('/submit-craft');
+  } catch (error) {
+    // res.json(error);
+    req.flash('infoErrors', error);
+    res.redirect('/submit-craft');
+  }
+}
 
-
+/**Delete craft - post */
+exports.deleteCraftPost = async(req, res) => {
+  try {
+    
+    let craftId = req.params.id;
+    const craft = await Craft.findById(craftId);
+    if(craft.name===req.body.name&&craft.email===req.body.email)
+    {
+      await Craft.deleteOne({ name: req.body.name });
+      res.redirect('/');
+    }
+    else
+    {
+      req.flash('delErrors', 'Only author can delete the DIY Blog ! Either email or DIY name is Wrong.');
+      res.redirect('/craft/'+craftId+'/delete');
+    }
+  } catch (error) {
+    req.flash('delErrors', error);
+    res.redirect('/craft/'+req.params.id+'/delete');
+  }
+} 
 
 
 // // Delete Recipe

@@ -49,3 +49,19 @@ a { color: var(--bs-dark); }
   width: 100%;
   object-fit: cover;
 }
+
+
+
+  /* .bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 50%;
+    } */
+    
+    @media (min-width: 1025px) {
+    .h-custom-2 {
+    height: 100%;
+    }
+    }

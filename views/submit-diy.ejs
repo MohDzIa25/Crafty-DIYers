@@ -1,7 +1,7 @@
 <div class="px-4 py-5 my-5 text-center">
-  <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+  <h1 class="display-5 fw-bold">Submit Your Work</h1>
   <div class="col-lg-6 mx-auto">
-    <p class="lead">Share your amazing recipies with thousands of web developers accross the world. Fill our form to get started.</p>
+    <p class="lead">Share your amazing crafts with thousands of DIY enthusiasts around the world. Fill out our form to get started and showcase your creativity!</p>
   </div>
 </div>
 
@@ -21,58 +21,62 @@
 
   <div class="col-8">
 
-    <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
+    <form action="/submit-craft" enctype="multipart/form-data" method="POST">
     
       <div class="row g-3">
 
         <div class="col-12">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" name="email" id="email" class="form-control">
+          <label for="email" class="form-label" required>Email</label>
+          <input type="email" name="email" id="email" class="form-control" required>
         </div>
 
         <div class="col-12">
-          <label for="name" class="form-label">Recipe Name</label>
+          <label for="name" class="form-label">DIY Name</label>
           <input type="text" name="name" id="name" class="form-control" required>
         </div>
         
         <div class="col-12">
-          <label for="description" class="form-label">Description</label>
-          <textarea name="description" id="description" class="form-control" cols="30" rows="4"></textarea>
+          <label for="description" class="form-label">Short Description</label>
+          <textarea name="description" id="description" class="form-control" cols="30" rows="4" required></textarea>
         </div>
 
         <div class="col-12">
-          <label for="name" class="form-label">Ingredients</label><br>
-          <small>Example: Ice</small>
-          <div class="ingredientList">
-            <div class="ingredeintDiv mb-1">
-              <input type="text" name="ingredients" class="form-control">
+          <label for="name" class="form-label">Steps or Instructions</label><br>
+          <small>Example: Take a sheet of paper</small>
+          <div class="instructionList">
+            <div class="instructionDiv mb-1">
+              <input type="text" name="instruction" class="form-control" required>
             </div>
           </div>
         </div>
-
+        
         <div class="col-12">
-          <button type="button" class="btn btn-outline-primary" id="addIngredientsBtn">+ Ingredient</button>
+          <button type="button" class="btn btn-outline-primary" id="addStepBtn">+ Steps</button>  
+          <button type="button" class="btn btn-outline-danger mx-3" id="removeStepBtn">- Steps</button>
         </div>
+        
 
         <div class="col-12">
           <label for="category">Select Category</label>
-          <select class="form-select form-control" name="category" aria-label="Category">
-            <option selected>Select Category</option>
-            <option value="Thai">Thai</option>
-            <option value="American">American</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Indian">Indian</option>
+          <select class="form-select form-control" name="category" aria-label="Category" required>
+            <!-- <option selected>Select Category</option> -->
+            <option value="Paper Crafts" selected>Paper Crafts</option>
+            <option value="Handmade Gifts">Handmade Gifts</option>
+            <option value="Artistic Endeavors">Artistic Endeavors</option>
+            <option value="DIY for Kids">DIY for Kids</option>
+            <option value="Sewing and Textiles">Sewing and Textiles</option>
+            <option value="Upcycling and Repurposing">Upcycling and Repurposing</option>
+            <option value="Others">Others</option>
           </select>
         </div>
 
         <div class="col-12">
-          <label for="image">Product Image</label>
-          <input type="file" class="form-control" name="image" accept="image/*">
+          <label for="image">DIY Image</label>
+          <input type="file" class="form-control" name="image" accept="image/*" required>
         </div>
 
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Submit Recipe</button>
+          <button type="submit" class="btn btn-primary">Submit Work</button>
         </div>
 
       </div>
