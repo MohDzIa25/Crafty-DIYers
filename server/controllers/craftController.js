@@ -2,6 +2,17 @@ require('../models/database');
 const Category = require('../models/Category');
 const Craft = require('../models/Craft');
 
+///////////////////////////////////////////////////////
+const multer = require("multer");
+const firebsae = require("firebase/app");
+const { getStorage, ref, uploadBytes, getDownloadURL } = require("firebase/storage");
+require("../models/firebase");
+
+  const storage = getStorage();
+  
+  const upload = multer({ storage: multer.memoryStorage() });
+///////////////////////////////////////////////////////
+
 /**
  * GET /
  * Homepage 
@@ -137,56 +148,44 @@ exports.exploreRandom = async(req, res) => {
 exports.submitCraft = async(req, res) => {
   const infoErrorsObj = req.flash('infoErrors');
   const infoSubmitObj = req.flash('infoSubmit');
+
   res.render('submit-diy', { title: 'Crafty DIYers - Submit Your DIY', infoErrorsObj, infoSubmitObj  } );
-  // res.render('submit-diy', { title: 'Crafty DIYers - Submit Your DIY' } );
 }
 
-/**
- * POST /submit-craft
- * Submit Craft
-*/
-exports.submitCraftOnPost = async(req, res) => {
-  try {
+exports.submitCraftOnPost=async (req,res)=>{
+  console.log(req.file);
+  console.log(req.body);
+   const upload=async()=>{
+      try{
+              const file = req.file;
+              console.log(file)
+              const storageRef = ref(storage, `${Date.now()}_${file.originalname}`);
+              const snapshot= await uploadBytes(storageRef, file.buffer);
+              const url = await getDownloadURL(storageRef);
 
-    let imageUploadFile;
-    let uploadPath;
-    let newImageName;
+              const newCraft= new Craft({
+                  name: req.body.name,
+                  description: req.body.description,
+                  email: req.body.email,
+                  instructions: req.body.instruction,
+                  category: req.body.category,
+                  image: url
+                });
+                await newCraft.save();
+              console.log(url);
+                req.flash('infoSubmit', 'Your DIY has been added.')
+                res.redirect('/submit-craft');
+      }
+      catch(err){
+          console.log("Error= "+err);
+          req.flash('infoErrors', 'Error '+err);
+          res.redirect('/submit-craft');
+      }
+   }
+   upload();
 
-    if(!req.files || Object.keys(req.files).length === 0){
-      console.log('No Files where uploaded.');
-    } else {
-
-      imageUploadFile = req.files.image;
-      newImageName = Date.now() + imageUploadFile.name;
-
-      uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
-
-      imageUploadFile.mv(uploadPath, function(err){
-        if(err) return res.satus(500).send(err);
-      })
-
-    }
-
-    const newCraft= new Craft({
-      name: req.body.name,
-      description: req.body.description,
-      email: req.body.email,
-      instructions: req.body.instruction,
-      category: req.body.category,
-      image: newImageName
-    });
-    console.log(req.body);
-    
-    await newCraft.save();
-
-    req.flash('infoSubmit', 'Your DIY has been added.')
-    res.redirect('/submit-craft');
-  } catch (error) {
-    // res.json(error);
-    req.flash('infoErrors', error);
-    res.redirect('/submit-craft');
-  }
 }
+
 
 /**Delete craft - post */
 exports.deleteCraftPost = async(req, res) => {

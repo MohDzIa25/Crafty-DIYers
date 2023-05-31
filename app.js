@@ -1,9 +1,13 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
+const multer = require("multer");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+
+
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,7 +25,8 @@ app.use(session({
   resave: true
 }));
 app.use(flash());
-app.use(fileUpload());
+// app.use(fileUpload());
+const upload = multer({ storage: multer.memoryStorage() });
 
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
