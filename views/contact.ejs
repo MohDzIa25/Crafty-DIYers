@@ -10,7 +10,7 @@
             
             <div class="d-flex align-items-center h-custom-2 ms-xl-4 mt-xl-n5 pt-3" >
             
-              <form  action="/contact" method="post">
+              <form  action="https://formspree.io/f/xvonjpno" method="POST">
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Contact Me</h3>
                 <div class="form-outline mb-4">
                     <label class="form-label"  for="form2Example18">Your name</label>
@@ -21,8 +21,12 @@
                   <input type="email" id="form2Example18" name="email" class="form-control form-control-lg"required/>
                 </div>
                 <div class="form-outline mb-4">
+                    <label class="form-label"   for="form2Example18">Subject</label>
+                  <input type="text" id="form2Example18" name="subject" class="form-control form-control-lg"required/>
+                </div>
+                <div class="form-outline mb-4">
                     <label for="description" class="form-label">Feedback</label>
-                    <textarea name="description" id="description" class="form-control" cols="30" rows="4" ></textarea>
+                    <textarea name="message" id="description" class="form-control" cols="30" rows="4" minlength="10"></textarea>
                 </div>
                 <div class="pt-1 mb-4">
                   <button class="btn btn-info btn-lg btn-block" type="submit">Send</button>

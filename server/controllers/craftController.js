@@ -42,6 +42,11 @@ exports.homepage = async(req, res) => {
 exports.aboutpage= async (req,res)=>{
   res.render('about',{title:'Crafty DIYers - About'});
 }
+
+/**
+ * GET /contact
+ * Contactpage 
+*/
 exports.contactpage= async (req,res)=>{
   res.render('contact',{title:'Crafty DIYers - Contact'});
 }
@@ -307,7 +312,14 @@ exports.updateCraftPost = async (req, res) => {
    update();
 };
 
+/**
+ * POST /contact
+ * Contactpage 
+*/
 
+exports.contactpagePost=async(req,res)=>{
+  console.log(req.body);
+}
 
 
 // // Delete Recipe
