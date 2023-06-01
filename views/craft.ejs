@@ -18,8 +18,13 @@
       <div class="row">
         <div class="col-12"><h1><%- craft.name %></h1></div>
         <div class="col-12 mb-4"><i class="bi bi-tag"></i> <%- craft.category %></div>
-        <div><a href="/craft/<%- craft.id%>/delete">Delete</a></div>
-        <div><a href="/craft/<%- craft.id%>/update-auth">Update</a></div>
+        <div class="d-flex justify-content-end">
+          <div>
+            <a href="/craft/<%- craft.id%>/delete"><i class="bi bi-trash mx-3"></i></a>
+            <a href="/craft/<%- craft.id%>/update-auth"><i class="bi bi-pencil-square"></i></a>
+        </div>
+        </div>
+        
         <div class="col-12" style="white-space: pre-line;">
           <h4>Short Description</h4>
           <%- craft.description %>

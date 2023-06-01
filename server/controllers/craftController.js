@@ -243,7 +243,6 @@ exports.updateAuthCraft = async(req, res) => {
   const infoSubmitObj = req.flash('deleted');
   let craftId = req.params.id;
   const craft = await Craft.findById(craftId);
-  console.log(craft);
   res.render('update_auth',{title: 'Crafty DIYers - Update '+craft.name,craft:craft, infoErrorsObj, infoSubmitObj});
 }
 
@@ -316,10 +315,6 @@ exports.updateCraftPost = async (req, res) => {
  * POST /contact
  * Contactpage 
 */
-
-exports.contactpagePost=async(req,res)=>{
-  console.log(req.body);
-}
 
 
 // // Delete Recipe
