@@ -16,6 +16,8 @@ require("../models/firebase");
 ///////////////////////////////////////////////////////////
 
 router.get('/', craftController.homepage);
+router.get('/about', craftController.aboutpage);
+router.get('/contact', craftController.contactpage);
 router.get('/craft/:id', craftController.exploreCraft );
 router.get('/craft/:id/delete', craftController.deleteCraft );
 router.get('/categories', craftController.exploreCategories);

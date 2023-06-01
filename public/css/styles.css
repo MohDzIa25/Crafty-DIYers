@@ -50,6 +50,10 @@ a { color: var(--bs-dark); }
   object-fit: cover;
 }
 
+.lighter-paragraph {
+  font-weight: lighter;
+
+}
 
 
   /* .bg-image-vertical {

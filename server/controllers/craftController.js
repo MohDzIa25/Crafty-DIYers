@@ -36,6 +36,19 @@ exports.homepage = async(req, res) => {
 }
 
 /**
+ * GET /about
+ * Aboutpage 
+*/
+exports.aboutpage= async (req,res)=>{
+  res.render('about',{title:'Crafty DIYers - About'});
+}
+exports.contactpage= async (req,res)=>{
+  res.render('contact',{title:'Crafty DIYers - Contact'});
+}
+
+
+
+/**
  * GET /categories
  * Categories 
 */
