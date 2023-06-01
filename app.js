@@ -34,4 +34,4 @@ app.set('view engine', 'ejs');
 const routes = require('./server/routes/craftRoutes.js')
 app.use('/', routes);
 
-app.listen(port, ()=> console.log(`Listening to port ${port}`));
+app.listen(port, "0.0.0.0",()=> console.log(`Listening to port ${port}`));
