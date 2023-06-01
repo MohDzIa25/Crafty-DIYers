@@ -23,16 +23,16 @@
     </nav>
   
   
-    <div class="row">
+    <div class="row text-res">
   
       <div class="col-12 col-md-5 mt-2">
-        <img src="<%- craft.image %>" class="img-fluid sticky-top" style="top: 20px;" alt="<%- craft.name %>" loading="lazy">
+        <img src="<%- craft.image %>" class="img-fluid sticky-top img-res" style="top: 20px;" alt="<%- craft.name %>" loading="lazy">
       </div>
   
-      <div class="col-12 col-md-7">
+      <div class="col-12 col-md-7 ">
             <div class="col-12">
               
-              <div class="d-flex align-items-center h-custom-2 ms-xl-4 mt-xl-n5 pt-3" >
+              <div class="d-flex align-items-center h-custom-2 ms-xl-4 mt-xl-n5 pt-3 text-res" >
               
                 <form  action="/craft/<%=craft.id%>/delete" method="post">
                   <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Delete <%= craft.name %></h3>

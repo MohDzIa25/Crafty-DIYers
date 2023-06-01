@@ -2,12 +2,11 @@
   --bs-font-sans-serif: 'Rubik', sans-serif;
 }
 
-/* .container-xxl { max-width: 1530px; } */
+.container-xxl { max-width: 1530px; }
 
 body {
   background-image: url("../img/background-craft.webp");
   background-color: rgb(228, 228, 220);
-  padding: 0rem 4rem 0rem 4rem;
 }
 .background-image{
   -webkit-mask-image: 
@@ -42,7 +41,7 @@ a { color: var(--bs-dark); }
 }
 
 .category__img--large {
-  height: 330px;
+  height: 300px;
 }
 
 .category__img img {
@@ -56,16 +55,42 @@ a { color: var(--bs-dark); }
 }
 
 
-  /* .bg-image-vertical {
+  .bg-image-vertical {
     position: relative;
     overflow: hidden;
     background-repeat: no-repeat;
     background-position: right center;
     background-size: 50%;
-    } */
-    
-    /* @media (min-width: 1025px) {
-    .h-custom-2 {
-    height: 100%;
     }
+    
+    @media (max-width: 1085px) {
+    /* .h-custom-2 {
+    height: 100%;
     } */
+    :root{
+      font-size: 0.75rem;
+    }
+    }
+    @media (max-width: 990px) {
+      :root{
+        font-size: 0.65rem;
+      }
+      .category__img--large {
+        height: 200px;
+      }
+      }
+      @media (max-width: 767px) {
+        .img-res{
+          height:70%;
+        }
+        .text-res{
+          padding:2rem 8rem;
+        }
+        
+
+        }
+        @media (max-width: 500px) {
+          .text-res{
+            padding:1rem 2rem;
+          }
+        }

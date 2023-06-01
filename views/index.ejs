@@ -1,18 +1,20 @@
-<div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
-  <div class="col-12 col-lg-6">
+<div class="row flex-lg-row-reverse flex-md-row-reverse align-items-center g-5 py-4 mb-4">
+  <div class="col-12 col-md-6">
     <img src="/img/hero.jpg" width="607" height="610" class="d-block mx-lg-auto img-fluid background-image" loading="lazy" alt="DIY With Node.js">
   </div>
 
-  <div class="col-12 col-lg-6">
+  <div class="col-12 col-md-6">
     <h1 class="display-5 fw-bold mb-3">Extensive collection of DIY project.</h1>
     <p class="lead">
       Explore a variety of DIY projects, including crafts, home decor, gifts, upcycling, and more. Unleash your creativity and find inspiration for every skill level. Join Crafty DIYers and bring your crafty ideas to life!
     </p>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+    <div class="d-flex justify-content-start">
       <a href="/explore-latest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Explore Latest</a>
-      <a href="/explore-random" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Show Random</a>
+      <a href="/explore-random" class="btn btn-outline-secondary btn-lg px-4 mx-3">Show Random</a>
     </div>
+    
+    
 
   </div>
 
@@ -23,7 +25,7 @@
 <!-- Categories Start -->
 
 
-<div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4">
+<div class="row row-cols-2 row-cols-lg-6 row-cols-md-4 row-cols-sm-3 g-2 g-lg-3 py-4">
 
 
   <% if(categories != '') { %>
@@ -59,7 +61,7 @@
     <a href="/explore-latest" class="ms-auto">View More</a>
   </div>
 
-  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  <div class="row row-cols-2 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 g-2 g-lg-3">
 
     <% if(diy != '') { %>
       <% diy.latest.forEach(function(craft, index){ %>
@@ -85,7 +87,7 @@
     <a href="/categories/Paper Crafts" class="ms-auto">View More</a>
   </div>
 
-  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  <div class="row row-cols-2 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 g-2 g-lg-3">
     <% if(typeof diy.paper !== 'undefined' && diy.paper.length > 0) { %>
       <% diy.paper.forEach(function(craft, index){ %>
       <a href="/craft/<%= craft._id %>" class="col text-center category__link">
@@ -109,7 +111,7 @@
     <a href="/categories/Artistic Endeavors" class="ms-auto">View More</a>
   </div>
 
-  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  <div class="row row-cols-2 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 g-2 g-lg-3">
     <% if(diy.artist != '') { %>
       <% diy.artist.forEach(function(craft, index){ %>
       <a href="/craft/<%= craft._id %>" class="col text-center category__link">
@@ -133,7 +135,7 @@
     <a href="/categories/DIY for Kids" class="ms-auto">View More</a>
   </div>
 
-  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  <div class="row row-cols-2 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 g-2 g-lg-3">
     <% if(diy.kids != '') { %>
       <% diy.kids.forEach(function(craft, index){ %>
       <a href="/craft/<%= craft._id %>" class="col text-center category__link">
