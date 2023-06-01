@@ -5,7 +5,7 @@
     <% diy.forEach(function(diy, index){ %>
     <a href="/craft/<%= diy._id %>" class="col text-center category__link">
       <div class="category__img category__img--large shadow">
-        <img src="/uploads/<%= diy.image %>" alt="<%= diy.name %>" loading="lazy">
+        <img src="<%= diy.image %>" alt="<%= diy.name %>" loading="lazy">
       </div>
       <div class="pt-1"><%= diy.name %></div>
     </a>

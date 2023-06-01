@@ -24,7 +24,11 @@ router.post('/search', craftController.searchCraft );
 router.get('/explore-latest', craftController.exploreLatest);
 router.get('/explore-random', craftController.exploreRandom);
 router.get('/submit-craft', craftController.submitCraft );
+router.get('/craft/:id/update-auth', craftController.updateAuthCraft);
+router.get('/craft/:id/update-craft/:email', craftController.updateCraft);
 router.post('/submit-craft',upload.single("image"), craftController.submitCraftOnPost);
 router.post('/craft/:id/delete', craftController.deleteCraftPost);
+router.post('/craft/:id/update-auth', craftController.updateAuthCraftPost);
+router.post('/craft/:id/update-craft/:email',upload.single("image"), craftController.updateCraftPost);
 
 module.exports = router;

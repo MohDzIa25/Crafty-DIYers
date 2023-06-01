@@ -43,7 +43,7 @@ exports.exploreCategories = async(req, res) => {
   try {
     const limitNumber = 20;
     const categories = await Category.find({}).limit(limitNumber);
-    res.render('categories', { title: 'Crafty DIYers - Categoreis', categories,categoryName:"Explore Categories" } );
+    res.render('categories', { title: 'Crafty DIYers - All Categoreis', categories,categoryName:"Explore Categories" } );
   } catch (error) {
     res.status(500).send({message: error.message || "Error Occured" });
   }
@@ -88,7 +88,7 @@ exports.deleteCraft = async(req, res) => {
   const infoSubmitObj = req.flash('deleted');
   let craftId = req.params.id;
   const craft = await Craft.findById(craftId);
-  res.render('delete',{craft:craft, infoErrorsObj, infoSubmitObj});
+  res.render('delete',{title: 'Crafty DIYers - Delete '+craft.name,craft:craft, infoErrorsObj, infoSubmitObj});
 } 
 
 
@@ -152,16 +152,15 @@ exports.submitCraft = async(req, res) => {
   res.render('submit-diy', { title: 'Crafty DIYers - Submit Your DIY', infoErrorsObj, infoSubmitObj  } );
 }
 
+
+/**  POST /submit-craft
+* Submit craft post
+*/
 exports.submitCraftOnPost=async (req,res)=>{
-  console.log(req.file);
-  console.log(req.body);
+
    const upload=async()=>{
       try{
-              const file = req.file;
-              console.log(file)
-              const storageRef = ref(storage, `${Date.now()}_${file.originalname}`);
-              const snapshot= await uploadBytes(storageRef, file.buffer);
-              const url = await getDownloadURL(storageRef);
+
 
               const newCraft= new Craft({
                   name: req.body.name,
@@ -169,10 +168,17 @@ exports.submitCraftOnPost=async (req,res)=>{
                   email: req.body.email,
                   instructions: req.body.instruction,
                   category: req.body.category,
-                  image: url
+                  image: "xxxxxxxxx"
                 });
                 await newCraft.save();
-              console.log(url);
+
+              const file = req.file;
+              const storageRef = ref(storage, `${newCraft.id}`);
+              const snapshot= await uploadBytes(storageRef, file.buffer);
+              const url = await getDownloadURL(storageRef);
+                newCraft.image=url;
+                await newCraft.save();
+
                 req.flash('infoSubmit', 'Your DIY has been added.')
                 res.redirect('/submit-craft');
       }
@@ -208,6 +214,87 @@ exports.deleteCraftPost = async(req, res) => {
     res.redirect('/craft/'+req.params.id+'/delete');
   }
 } 
+
+
+/** GET-   /craft/:id/update-auth   */
+
+
+
+exports.updateAuthCraft = async(req, res) => {
+  const infoErrorsObj = req.flash('delErrors');
+  const infoSubmitObj = req.flash('deleted');
+  let craftId = req.params.id;
+  const craft = await Craft.findById(craftId);
+  console.log(craft);
+  res.render('update_auth',{title: 'Crafty DIYers - Update '+craft.name,craft:craft, infoErrorsObj, infoSubmitObj});
+}
+
+/** Post  /craft/:id/update-auth */
+exports.updateAuthCraftPost = async(req, res) => {
+  try {
+    
+    let craftId = req.params.id;
+    const craft = await Craft.findById(craftId);
+    if(craft.name===req.body.name&&craft.email===req.body.email)
+    {
+      res.redirect('/craft/'+craftId+'/update-craft/'+craft.email);
+    }
+    else
+    {
+      req.flash('delErrors', 'Only author can update the DIY Blog ! Either email or DIY name is Wrong.');
+      res.redirect('/craft/'+craftId+'/update-auth');
+    }
+  } catch (error) {
+    req.flash('delErrors', error);
+    res.redirect('/craft/'+req.params.id+'/update-auth/');
+  }
+} 
+
+
+/** GET-   /craft/:id/update   */
+exports.updateCraft = async(req, res) => {
+  const infoErrorsObj = req.flash('infoErrors');
+  const infoSubmitObj = req.flash('infoSubmit');
+  let craftId = req.params.id;
+  const craft = await Craft.findById(craftId);
+  res.render('update',{title: 'Crafty DIYers - Author',craft:craft,infoErrorsObj, infoSubmitObj});
+}
+
+/** POST- /craft/:id/update/email */ 
+exports.updateCraftPost = async (req, res) => {
+  const craftId = req.params.id;
+  const { email, name, description, instruction, category } = req.body;
+
+    const update=async()=>{
+      try{
+
+          const craft = await Craft.findById(craftId);
+          
+              const file = req.file;
+              const storageRef = ref(storage, `${craft.id}`);
+              const snapshot= await uploadBytes(storageRef, file.buffer);
+              const url = await getDownloadURL(storageRef);
+
+          craft.email = email;
+          craft.name = name;
+          craft.description = description;
+          craft.instruction = instruction;
+          craft.category = category;
+          craft.image=url;
+          await craft.save();
+          req.flash('infoSubmit', 'Your DIY has been updated.')
+          res.redirect('/craft/'+craft.id+'/update-craft/'+craft.email);
+      }
+      catch(err){
+          console.log("Error= "+err);
+          req.flash('infoErrors', 'Error '+err);
+          res.redirect('/craft/'+req.params.id+'/update-craft/'+req.params.email);
+      }
+   }
+   update();
+};
+
+
 
 
 // // Delete Recipe
